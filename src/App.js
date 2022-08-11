@@ -5,11 +5,24 @@ import ProductList from "./ProductList";
 import React, { Component } from "react";
 
 export default class App extends Component {
-  state = { currentCategory: "" };
-
+  state = { currentCategory: "", products: [] };
+  componentDidMount(){
+    this.getProducts();
+  }
   changeCategory = (category) => {
     this.setState({ currentCategory: category.categoryName });
+    this.getProducts(category.id);
   };
+  getProducts = categoryId => {
+    let url = "http://localhost:3000/products";
+    if(categoryId){
+      url+="?categoryId="+categoryId;
+    }
+    fetch(url)
+      .then((response) => response.json())
+      .then((data) => this.setState({ products: data }));
+  };
+
   render() {
     let categoryInfo = { title: "Category List" };
     let productInfo = { title: "Product List" };
@@ -29,6 +42,7 @@ export default class App extends Component {
             </Col>
             <Col xs="9">
               <ProductList
+                products={this.state.products}
                 currentCategory={this.state.currentCategory}
                 info={productInfo}
               />
