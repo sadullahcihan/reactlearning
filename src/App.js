@@ -7,6 +7,8 @@ import alertify from "alertifyjs";
 import { Routes, Route } from "react-router-dom";
 import NotFound from "./NotFound";
 import CartList from "./CartList";
+import FormDemo1 from "./FormDemo1";
+import FormDemo2 from "./FormDemo2";
 
 export default class App extends Component {
   state = { currentCategory: "", products: [], cart: [] };
@@ -61,6 +63,8 @@ export default class App extends Component {
               />
             </Col>
             <Col xs="9">
+              {/* <FormDemo1/>
+              <FormDemo2/> */}
               <ProductList
                 products={this.state.products}
                 addToCart={this.addToCart}
