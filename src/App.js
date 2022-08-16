@@ -4,6 +4,9 @@ import Navi from "./Navi";
 import ProductList from "./ProductList";
 import React, { Component } from "react";
 import alertify from "alertifyjs";
+import { Routes, Route } from "react-router-dom";
+import NotFound from "./NotFound";
+import CartList from "./CartList";
 
 export default class App extends Component {
   state = { currentCategory: "", products: [], cart: [] };
@@ -33,14 +36,14 @@ export default class App extends Component {
       newCart.push({ product: product, quantity: 1 });
     }
     this.setState({ cart: newCart });
-    alertify.success(product.productName+ "added to cart", 1.7);
+    alertify.success(product.productName + " added to cart", 1.7);
   };
 
   removeFromCart = (product) => {
-    let newCart = this.state.cart.filter(c=>c.product.id !==product.id)
-    this.setState({cart:newCart})
-    alertify.error(product.productName+ "deleted from cart", 1.7);
-  }
+    let newCart = this.state.cart.filter((c) => c.product.id !== product.id);
+    this.setState({ cart: newCart });
+    alertify.error(product.productName + " deleted from cart", 1.7);
+  };
 
   render() {
     let categoryInfo = { title: "Category List" }; // new infos can be sent by using inside bracklets {... , ... , ...}
@@ -48,7 +51,7 @@ export default class App extends Component {
     return (
       <div>
         <Container>
-          <Navi removeFromCart= {this.removeFromCart} cart={this.state.cart} />
+          <Navi removeFromCart={this.removeFromCart} cart={this.state.cart} />
           <Row>
             <Col xs="3">
               <CategoryList
@@ -63,6 +66,10 @@ export default class App extends Component {
                 addToCart={this.addToCart}
                 currentCategory={this.state.currentCategory}
                 info={productInfo}
+              />
+              <CartList
+                cart={this.state.cart}
+                removeFromCart={this.removeFromCart}
               />
             </Col>
           </Row>

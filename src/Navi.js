@@ -1,20 +1,27 @@
 import React, { Component } from "react";
-import {
-  Navbar,
-  NavbarBrand,
-  Nav,
-} from "reactstrap";
+import { Navbar, NavbarBrand, Nav } from "reactstrap";
 import CartSummary from "./CartSummary";
+import { Link } from "react-router-dom";
 
-export default class Navi extends Component{
+export default class Navi extends Component {
   render() {
     return (
       <div>
-        <Navbar >
-          <Nav className="me-auto" navbar>
-            <NavbarBrand href="/">Northwind DB</NavbarBrand>
-          </Nav>
-          <CartSummary removeFromCart= {this.props.removeFromCart}  cart = {this.props.cart}/>
+        <Navbar>
+          <nav className="me-auto" navbar>
+            <NavbarBrand href="/">Northwind App</NavbarBrand>
+          </nav>
+          <CartSummary
+            removeFromCart={this.props.removeFromCart}
+            cart={this.props.cart}
+          ></CartSummary>
+          {/* <Link
+            //removeFromCart={this.props.removeFromCart}
+            //cart={this.props.cart}
+            to="/cart"
+          >
+            Cart
+          </Link> */}
         </Navbar>
       </div>
     );
